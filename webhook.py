@@ -28,8 +28,8 @@ def webhook():
     #return	data.to_json()
 
 def get_address(req):
-    #if req.get("result").get("action") != "fetchWeatherForecast":
-    #    return {}
+    if req.get("result").get("action") != "givingAddress":
+        return {}
     result = req.get("result")
     parameters = result.get("parameters")
     address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]["address"].to_string()
