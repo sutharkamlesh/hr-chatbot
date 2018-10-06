@@ -18,8 +18,11 @@ def webhook():
     req = request.get_json(silent=True, force=True)
     #print(json.dumps(req, indent=4))
 
-    res = get_address(req)
-
+    if req.get("result").get("action") != "getcontact":
+        res = get_contact(req)
+    elif req.get("result").get("action") != "givingAddress":
+        res = get_address(req)
+    
     res = json.dumps(res, indent=4)
     # print(res)
     r = make_response(res)
@@ -38,6 +41,22 @@ def get_address(req):
     else:
         speech = "Sorry we don't have this information"
     return  {
+    "speech": speech,
+    "displayText": speech,
+    "source": "apiai-weather-webhook"
+    }
+
+def get_contact(req):
+    if req.get("result").get("action") != "getcontact":
+        return {}
+    result = req.get("result")
+    parameters = result.get("parameters")
+    address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
+    if address.split()[0] != 'Empty':
+        speech = "Here it is: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['phone'].to_string()
+    else:
+        speech = "Sorry we don't have this information"
+    return {
     "speech": speech,
     "displayText": speech,
     "source": "apiai-weather-webhook"
