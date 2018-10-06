@@ -34,7 +34,15 @@ def get_address(req):
     parameters = result.get("parameters")
     address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]["address"].to_string()
     speech = "Here is the address: "+address
-    return {'fulfillmentText': speech}
+    return {"fulfillment": {
+      "speech": speech,
+      "messages": [
+        {
+          "type": 0,
+          "speech": speech
+        }
+      ]
+    }}
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
