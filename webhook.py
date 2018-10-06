@@ -33,7 +33,10 @@ def get_address(req):
     result = req.get("result")
     parameters = result.get("parameters")
     address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]["address"].to_string()
-    speech = "Here is the address: "+address
+    if address:
+        speech = "Here is the address: "+address
+    else:
+        speech = "Sorry we don't have this information"
     return  {
     "speech": speech,
     "displayText": speech,
