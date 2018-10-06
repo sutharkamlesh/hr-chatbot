@@ -1,4 +1,4 @@
 Flask==1.0.2
 requests==0.11.1
 pandas==0.22.0
-json==2.0.9
+json
