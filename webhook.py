@@ -8,7 +8,9 @@ from flask import request
 from flask import make_response
 
 data = pd.read_csv("Apollo_locations.csv")
-
+policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
+          "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
+          "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -22,7 +24,15 @@ def webhook():
         res = get_contact(req)
     elif req.get("result").get("action") == "givingAddress":
         res = get_address(req)
-    
+    elif req.get("result").get("action") == "getPolicy":
+        res = get_policy(req)
+    else:
+        res = {
+            "speech": "Your request cannot be fulfilled.",
+            "displayText": "Your request cannot be fulfilled.",
+            "source": "webhook"
+            }
+
     res = json.dumps(res, indent=4)
     # print(res)
     r = make_response(res)
@@ -41,7 +51,7 @@ def get_address(req):
     return  {
     "speech": speech,
     "displayText": speech,
-    "source": "apiai-weather-webhook"
+    "source": "webhook"
     }
 
 def get_contact(req):
@@ -55,9 +65,21 @@ def get_contact(req):
     return {
     "speech": speech,
     "displayText": speech,
-    "source": "apiai-weather-webhook"
+    "source": "webhook"
     }
 
+def get_policy(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    if parameters['policy'] in policy.keys():
+        speech = "You can see our "+ parameters['policy'] +" policy from here: " + policy[parameters['policy']]
+    else:
+        speech = "Sorry we don't have this information"
+    return {
+    "speech": speech,
+    "displayText": speech,
+    "source": "webhook"
+    }
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port {}".format(port))
