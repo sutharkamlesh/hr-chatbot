@@ -27,11 +27,7 @@ def webhook():
     elif req.get("result").get("action") == "getPolicy":
         res = get_policy(req)
     else:
-        res = {
-            "speech": "Your request cannot be fulfilled.",
-            "displayText": "Your request cannot be fulfilled.",
-            "source": "webhook"
-            }
+        res = {}
 
     res = json.dumps(res, indent=4)
     # print(res)
