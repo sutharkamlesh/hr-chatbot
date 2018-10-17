@@ -65,12 +65,12 @@ def processRequest(req):
         else:
             speech = "Sorry we don't have this information"
         return {
-	    "speech": speech,
-	    "displayText": speech,
-	    "source": "webhook"
-	    }
-        else:
-            return {}
+                "speech": speech,
+                "displayText": speech,
+                "source": "webhook"
+                }
+    else:
+        return {}
 
 
 if __name__ == '__main__':
