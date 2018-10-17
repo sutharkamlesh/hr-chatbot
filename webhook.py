@@ -31,46 +31,46 @@ def webhook():
 
 
 def processRequest(req):
-	if req.get("result").get("action") == "getcontact":
+    if req.get("result").get("action") == "getcontact":
         result = req.get("result")
-	    parameters = result.get("parameters")
-	    address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
-	    if address.split()[0] != 'Empty':
-	        speech = "Here it is: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['phone'].to_string()[1:]
-	    else:
-	        speech = "Sorry we don't have this information"
-	    return {
-	    "speech": speech,
-	    "displayText": speech,
-	    "source": "webhook"
-	    }
+        parameters = result.get("parameters")
+        address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
+        if address.split()[0] != 'Empty':
+            speech = "Here it is: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['phone'].to_string()[1:]
+        else:
+            speech = "Sorry we don't have this information"
+        return {
+                "speech": speech,
+                "displayText": speech,
+                "source": "webhook"
+                }
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
-	    parameters = result.get("parameters")
-	    address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
-	    if address.split()[0] != 'Empty':
-	        speech = "Here is the address: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['address'].to_string()[1:]
-	    else:
-	        speech = "Sorry we don't have this information"
-	    return  {
-	    "speech": speech,
-	    "displayText": speech,
-	    "source": "webhook"
-	    }
+        parameters = result.get("parameters")
+        address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
+        if address.split()[0] != 'Empty':
+            speech = "Here is the address: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['address'].to_string()[1:]
+        else:
+            speech = "Sorry we don't have this information"
+        return  {
+                "speech": speech,
+                "displayText": speech,
+                "source": "webhook"
+                }
     elif req.get("result").get("action") == "getPolicy":
         result = req.get("result")
-	    parameters = result.get("parameters")
-	    if parameters['policy'] in policy.keys():
-	        speech = "You can see our "+ parameters['policy'] +" policy from here: " + policy[parameters['policy']]
-	    else:
-	        speech = "Sorry we don't have this information"
-	    return {
+        parameters = result.get("parameters")
+        if parameters['policy'] in policy.keys():
+            speech = "You can see our "+ parameters['policy'] +" policy from here: " + policy[parameters['policy']]
+        else:
+            speech = "Sorry we don't have this information"
+        return {
 	    "speech": speech,
 	    "displayText": speech,
 	    "source": "webhook"
 	    }
-	 else:
-	 	return {}
+        else:
+            return {}
 
 
 if __name__ == '__main__':
