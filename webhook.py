@@ -26,8 +26,6 @@ def webhook():
         res = get_address(req)
     elif req.get("result").get("action") == "getPolicy":
         res = get_policy(req)
-    else:
-        res = {}
 
     res = json.dumps(res, indent=4)
     # print(res)
