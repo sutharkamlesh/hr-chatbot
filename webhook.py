@@ -48,11 +48,8 @@ def processRequest(req):
         result = req.get("result")
         parameters = result.get("parameters")
         idx = list(map(np.all, zip(data["state"]==parameters["state"], data["type"] == parameters["type"]))).index(True)
-        address = data.iloc[idx, 'address']
-        if address.split()[0] != 'Empty':
-            speech = "Here is the address: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['address'].to_string()[1:]
-        else:
-            speech = "Sorry we don't have this information"
+        address = data.loc[idx, 'address']
+        speech = "Here is the address: "+ address
         return  {
                 "speech": speech,
                 "displayText": speech,
