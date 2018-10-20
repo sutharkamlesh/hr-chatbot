@@ -7,13 +7,12 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-data = pd.read_csv("Apollo_locations.csv")
+data = pd.read_csv("D://hr-chatbot//Apollo_locations.csv")
 policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
           "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
           "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
 # Flask app should start in global layout
 app = Flask(__name__)
-
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -47,7 +46,7 @@ def processRequest(req):
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
         parameters = result.get("parameters")
-        address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
+        address = data[(data["state"]==parameters["state"]).index(True)][data["type"] == parameters["type"]].to_string()
         if address.split()[0] != 'Empty':
             speech = "Here is the address: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['address'].to_string()[1:]
         else:
@@ -85,9 +84,10 @@ if __name__ == '__main__':
 
 
 
+#%%
+import numpy as np
 
-
-
+data.loc[[True, False,False,False].index(True), 'address']
 
 
 
