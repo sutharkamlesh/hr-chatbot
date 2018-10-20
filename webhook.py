@@ -7,7 +7,7 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-data = pd.read_csv("D://hr-chatbot//Apollo_locations.csv")
+data = pd.read_csv("Apollo_locations.csv")
 policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
           "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
           "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
@@ -87,7 +87,7 @@ if __name__ == '__main__':
 #%%
 import numpy as np
 
-data.loc[[True, False,False,False].index(True), 'address']
+data.loc[0,:]
 
 
 
