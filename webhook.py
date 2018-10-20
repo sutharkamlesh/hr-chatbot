@@ -2,6 +2,7 @@ import json
 import os
 import requests
 import pandas as pd
+import numpy as np
 
 from flask import Flask
 from flask import request
@@ -46,7 +47,8 @@ def processRequest(req):
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
         parameters = result.get("parameters")
-        address = data[(data["state"]==parameters["state"]).index(True)][data["type"] == parameters["type"]].to_string()
+        idx = list(map(np.all, zip(data["state"]==parameters["state"], data["type"] == parameters["type"]))).index(True)
+        address = data.iloc[idx, 'address']
         if address.split()[0] != 'Empty':
             speech = "Here is the address: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['address'].to_string()[1:]
         else:
@@ -84,13 +86,13 @@ if __name__ == '__main__':
 
 
 
-#%%
+"""
 import numpy as np
-
+parameters  = {'state':"Tamil Nadu", "type":"R&D Centre"}
 data.loc[0,:]
 
 
 
 
-
-
+data[(data["state"]==parameters["state"]).index(True)][data["type"] == parameters["type"]]
+"""
