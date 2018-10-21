@@ -47,7 +47,7 @@ def processRequest(req):
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
         parameters = result.get("parameters")
-        idx = list(map(np.all, zip(data["state"]==parameters["state"], data["type"] == parameters["type"]))).index(True)
+        idx = list(data["state"]==parameters["state"]).index(True)
         address = data.loc[idx, 'address']
         speech = "Here is the address: "+ address
         return  {
