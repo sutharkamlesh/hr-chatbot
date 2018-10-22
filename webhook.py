@@ -34,11 +34,9 @@ def processRequest(req):
     if req.get("result").get("action") == "getcontact":
         result = req.get("result")
         parameters = result.get("parameters")
-        address = data[data["state"]==parameters["state"]][data["type"] == parameters["type"]].to_string()
-        if address.split()[0] != 'Empty':
-            speech = "Here it is: "+data[data["state"]==parameters["state"]][data["type"] == parameters["type"]]['phone'].to_string()[1:]
-        else:
-            speech = "Sorry we don't have this information"
+        idx = list(data["state"]==parameters["state"]).index(True)
+        contact = data.loc[idx, 'phone']
+        speech = "Here it is: "+contact
         return {
                 "speech": speech,
                 "displayText": speech,
