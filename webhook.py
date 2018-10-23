@@ -63,7 +63,8 @@ def processRequest(req):
         return {
                 "speech": speech,
                 "displayText": speech,
-                "source": "webhook"
+                "source": "webhook",
+                "sidebar_url": policy[parameters['policy']]
                 }
     else:
         return {}
