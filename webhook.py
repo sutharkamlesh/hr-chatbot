@@ -64,7 +64,7 @@ def processRequest(req):
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "contexts": [{"sidebar_url": policy[parameters['policy']]}]
+                "contextOut": [{"sidebar_url": policy[parameters['policy']]}]
                 }
     else:
         return {}
