@@ -12,6 +12,8 @@ data = pd.read_csv("Apollo_locations.csv")
 policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
           "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
           "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
+office_location = {"Mumbai":"Interactive Avenues Pvt. Ltd.,\\n 3rd Floor, Chhibber House,\\n M Vasanji Road, Opposite Pop Tate’s, \\n Near Sakinaka Metro Station,\\n Andheri East, Mumbai - 400072.\\n Tel: +91 022 - 6264 5000"}
+
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -65,6 +67,16 @@ def processRequest(req):
                 "displayText": speech,
                 "source": "webhook",
                 "data": {"sidebar_url": policy[parameters['policy']]}
+                }
+    elif req.get("result").get("action") == "OfficeLocation":
+        result = req.get("result")
+        parameters = result.get("parameters")
+        address = office_location[parameters['location']]
+        speech = "Here is the address: "+ address
+        return  {
+                "speech": speech,
+                "displayText": speech,
+                "source": "webhook"
                 }
     else:
         return {}
