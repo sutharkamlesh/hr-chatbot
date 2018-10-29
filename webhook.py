@@ -16,7 +16,32 @@ office_location = {"Mumbai":"\n Interactive Avenues Pvt. Ltd.,\n 3rd Floor, Chhi
                     "Gurgaon": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Plot#15, Sector 44, Institutional Area,\n Gurgaon - 122 012.\n Tel: +91 (124) 4410900",
                     "Bengaluru":"\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Mateen Tower, Diamond District,\n Old Airport Road, Domlur,\n Bengaluru - 560 008.\n Tel: +91 8042717834 \n Mob: +91 9343797506",
                     "Kolkata":"\n Interactive Avenues Pvt. Ltd.,\n Flat C, Ground Floor, Tivoli Court,\n 1A Ballygunge Circular Road,\n Kolkata- 700019.\n Mob: +91 7044089122"}
-
+office_CP = {
+                "Mumbai":{
+                    "name":"Harish Iyer",
+                    "designation":"Vice President",
+                    "email":"harish.iyer@interactiveavenues.com",
+                    "phone":"9820466984"
+                },
+                "Gurgaon": {
+                    "name":"Harish Iyer",
+                    "designation":"Vice President",
+                    "email":"harish.iyer@interactiveavenues.com",
+                    "phone":"9820466984"
+                },
+                "Bengaluru":{
+                    "name":"Harish Iyer",
+                    "designation":"Vice President",
+                    "email":"harish.iyer@interactiveavenues.com",
+                    "phone":"9820466984"
+                },
+                "Kolkata":{
+                    "name":"Harish Iyer",
+                    "designation":"Vice President",
+                    "email":"harish.iyer@interactiveavenues.com",
+                    "phone":"9820466984"
+                }
+            }
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -88,6 +113,15 @@ def processRequest(req):
                  "displayText": speech,
                  "source": "webhook",
                  "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"}
+                }
+    elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
+        result = req.get("result")
+        parameters = result.get("parameters")
+        speech = "You can talk to "+office_CP[parameters['location']]["name"]+" who is "+office_CP[parameters['location']]["designation"]+" at Interactive Avenues. \n Email: "+office_CP[parameters['location']]["email"]+"\n Phone: "+office_CP[parameters['location']]["phone"]
+        return  {
+                 "speech": speech,
+                 "displayText": speech,
+                 "source": "webhook",
                 }
     else:
         return {}
