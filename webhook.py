@@ -81,6 +81,10 @@ def processRequest(req):
                 "displayText": speech,
                 "source": "webhook",
                 }
+    elif req.get("result").get("action") == "aboutcompany":
+        return  {
+                 "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"}
+                }
     else:
         return {}
 
