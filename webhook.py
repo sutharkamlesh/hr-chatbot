@@ -13,9 +13,9 @@ policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
           "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
           "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
 office_location = {"Mumbai":"Interactive Avenues Pvt. Ltd.,\n 3rd Floor, Chhibber House,\n M Vasanji Road, Opposite Pop Tate’s, \n Near Sakinaka Metro Station,\n Andheri East, Mumbai - 400072.\n Tel: +91 022 - 6264 5000",
-                    "Gurgaon": "Interactive Avenues Pvt. Ltd., 5th Floor, Plot#15, Sector 44, Institutional Area, Gurgaon - 122 012. Tel: +91 (124) 4410900",
-                    "Bengaluru":"Interactive Avenues Pvt. Ltd., 5th Floor, Mateen Tower, Diamond District, Old Airport Road, Domlur, Bengaluru - 560 008. Tel: +91 8042717834 ,Mob: +91 9343797506",
-                    "Kolkata":"Interactive Avenues Pvt. Ltd., Flat C, Ground Floor, Tivoli Court, 1A Ballygunge Circular Road, Kolkata- 700019. Mob: +91 7044089122"}
+                    "Gurgaon": "Interactive Avenues Pvt. Ltd.,\n 5th Floor, Plot#15, Sector 44, Institutional Area,\n Gurgaon - 122 012.\n Tel: +91 (124) 4410900",
+                    "Bengaluru":"Interactive Avenues Pvt. Ltd.,\n 5th Floor, Mateen Tower, Diamond District,\n Old Airport Road, Domlur,\n Bengaluru - 560 008.\n Tel: +91 8042717834 \n Mob: +91 9343797506",
+                    "Kolkata":"Interactive Avenues Pvt. Ltd.,\n Flat C, Ground Floor, Tivoli Court,\n 1A Ballygunge Circular Road,\n Kolkata- 700019.\n Mob: +91 7044089122"}
 
 # Flask app should start in global layout
 app = Flask(__name__)
