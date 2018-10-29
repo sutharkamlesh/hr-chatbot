@@ -46,7 +46,6 @@ def processRequest(req):
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "data": {"sidebar_url": ""}
                 }
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
@@ -58,7 +57,6 @@ def processRequest(req):
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "data": {"sidebar_url": ""}
                 }
     elif req.get("result").get("action") == "getPolicy":
         result = req.get("result")
@@ -82,7 +80,6 @@ def processRequest(req):
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "data": {"sidebar_url": ""}
                 }
     else:
         return {}
