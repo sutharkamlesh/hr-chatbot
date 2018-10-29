@@ -24,22 +24,22 @@ office_CP = {
                     "phone":"9820466984"
                 },
                 "Gurgaon": {
-                    "name":"Harish Iyer",
+                    "name":"Abhishek Chadha",
                     "designation":"Vice President",
-                    "email":"harish.iyer@interactiveavenues.com",
-                    "phone":"9820466984"
+                    "email":"abbhishek.chadha@interactiveavenues.com",
+                    "phone":"9871117894"
                 },
                 "Bengaluru":{
-                    "name":"Harish Iyer",
-                    "designation":"Vice President",
-                    "email":"harish.iyer@interactiveavenues.com",
-                    "phone":"9820466984"
+                    "name":"Aparna Tadikonda",
+                    "designation":"Executive Vice President",
+                    "email":"aparna.tadikonda@interactiveavenues.com",
+                    "phone":"9343797506"
                 },
                 "Kolkata":{
-                    "name":"Harish Iyer",
-                    "designation":"Vice President",
-                    "email":"harish.iyer@interactiveavenues.com",
-                    "phone":"9820466984"
+                    "name":"Susmita Mukhopadhyay",
+                    "designation":"Senior Group Head",
+                    "email":"susmita.mukhopadhyay@interactiveavenues.com",
+                    "phone":"7044089122"
                 }
             }
 # Flask app should start in global layout
