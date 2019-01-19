@@ -139,7 +139,7 @@ def processRequest(req):
     elif req.get("result").get("action") == "jobs":
         result = req.get("result")
         parameters = result.get("parameters")
-        speech = "You can jobs here: http://www.interactiveavenues.com/careers.html"
+        speech = "Cool, we are always ready to hire talented and inspiring candidates. You can see jobs on our career site: http://www.interactiveavenues.com/careers.html"
         return  {
                  "speech": speech,
                  "displayText": speech,
