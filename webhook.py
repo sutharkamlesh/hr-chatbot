@@ -9,6 +9,8 @@ from flask import request
 from flask import make_response
 
 data = pd.read_csv("Apollo_locations.csv")
+jobs = pd.read_csv("Jobs.csv", encoding = 'latin_1')
+
 policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
           "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
           "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
@@ -49,7 +51,6 @@ app = Flask(__name__)
 def webhook():
     req = request.get_json(silent=True, force=True)
     #print(json.dumps(req, indent=4))
-
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
@@ -61,6 +62,8 @@ def webhook():
 
 
 def processRequest(req):
+
+    # Getting Contact details
     if req.get("result").get("action") == "getcontact":
         result = req.get("result")
         parameters = result.get("parameters")
@@ -72,6 +75,8 @@ def processRequest(req):
                 "displayText": speech,
                 "source": "webhook",
                 }
+
+    # Getting Address
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
         parameters = result.get("parameters")
@@ -83,6 +88,7 @@ def processRequest(req):
                 "displayText": speech,
                 "source": "webhook",
                 }
+    # Get policy details
     elif req.get("result").get("action") == "getPolicy":
         result = req.get("result")
         parameters = result.get("parameters")
@@ -96,6 +102,8 @@ def processRequest(req):
                 "source": "webhook",
                 "data": {"sidebar_url": policy[parameters['policy']]}
                 }
+    
+    # Getting Address of Office IA
     elif req.get("result").get("action") == "OfficeLocation":
         result = req.get("result")
         parameters = result.get("parameters")
@@ -106,6 +114,8 @@ def processRequest(req):
                 "displayText": speech,
                 "source": "webhook",
                 }
+    
+    # About Company with their website
     elif req.get("result").get("action") == "aboutcompany":
         speech = "A group of people who loved and lived online wanted to change the way you look at it. That’s how IA was formed. Ten years later, that small group has grown to include over 350+ people who share the same passion. And it’s not just passion that we bring to the table. We’ve got some of the most experienced forces on the team and our acquisition by IPG Mediabrands in 2013 has only made us stronger. As the global media holding company of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us the ability to join forces with hundreds of talented marketing professionals within the network"
         return  {
@@ -114,6 +124,8 @@ def processRequest(req):
                  "source": "webhook",
                  "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"}
                 }
+    
+    # Giving Contact person details of given office location 
     elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
         result = req.get("result")
         parameters = result.get("parameters")
@@ -123,6 +135,29 @@ def processRequest(req):
                  "displayText": speech,
                  "source": "webhook",
                 }
+    
+    # Giving Jobs Details 
+    elif req.get("result").get("action") == "jobs":
+        result = req.get("result")
+        parameters = result.get("parameters")
+        location = parameters['location']
+        MinExp = parameters['MinExp']["amount"]
+        Skills = parameters["Skills"]
+
+        if location:
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].head(1).to_dict(orient='records')
+            speech = "We have job opening for {0} position in {1} with experience ranging between {2} to {3} years.".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
+        else:
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].to_dict(orient='records')[0]
+            speech = "We have job opening for {0} position with experience ranging between {1} to {2} years.".format(job['JobTitle'], job["MinExp"], job["MaxExp"])
+        
+        return  {
+                 "speech": speech,
+                 "displayText": speech,
+                 "source": "webhook",
+                 "data":{"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                }
+    
     else:
         return {}
 
@@ -132,20 +167,4 @@ if __name__ == '__main__':
     print("Starting app on port {}".format(port))
     app.run(debug=False, port=port, host='0.0.0.0')
 
-
-
-
-
-
-
-
-"""
-import numpy as np
-parameters  = {'state':"Tamil Nadu", "type":"R&D Centre"}
-data.loc[0,:]
-
-
-
-
-data[(data["state"]==parameters["state"]).index(True)][data["type"] == parameters["type"]]
-"""
+#parameters={"Skills": "Design","MinExp": {"amount": 2,"unit": "yr"},"location": ""}
