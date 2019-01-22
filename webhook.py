@@ -148,7 +148,7 @@ def processRequest(req):
             job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position in {1} with experience ranging between {2} to {3} years.".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position with experience ranging between {1} to {2} years.".format(job['JobTitle'], job["MinExp"], job["MaxExp"])
         
         return  {
@@ -170,7 +170,7 @@ def processRequest(req):
             job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         
         return  {
@@ -192,7 +192,7 @@ def processRequest(req):
             job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         
         return  {
