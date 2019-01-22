@@ -158,6 +158,27 @@ def processRequest(req):
                  "data":{"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
                 }
     
+    elif req.get("result").get("action") == "job_description":
+        result = req.get("result")
+        parameters = result.get("parameters")
+        location = parameters['location']
+        MinExp = parameters['MinExp']["amount"]
+        Skills = parameters["Skills"]
+
+        if location:
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].head(1).to_dict(orient='records')
+            speech = "Job Description: " + job['JobDescription']
+        else:
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].to_dict(orient='records')[0]
+            speech = "Job Description: " + job['JobDescription']
+        
+        return  {
+                 "speech": speech,
+                 "displayText": speech,
+                 "source": "webhook",
+                 "data":{"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                }
+    
     else:
         return {}
 
