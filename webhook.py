@@ -166,10 +166,10 @@ def processRequest(req):
         Skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].head(1).to_dict(orient='records')
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')
             speech = "Job Description: " + job['JobDescription']
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         
         return  {
@@ -187,10 +187,10 @@ def processRequest(req):
         Skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].head(1).to_dict(orient='records')
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')
             speech = "Salary range: " + job['MinSalary'] + " to " + job['MaxSalary']
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] >= MinExp].to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         
         return  {
@@ -199,7 +199,7 @@ def processRequest(req):
                  "source": "webhook",
                  "data":{"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
                 }
-
+    
     else:
         return {}
 
