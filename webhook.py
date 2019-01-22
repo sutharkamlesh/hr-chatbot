@@ -190,10 +190,10 @@ def processRequest(req):
 
         if location:
             job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
-            speech = "Salary range: " + job['MinSalary'] + " to " + job['MaxSalary']
+            speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         else:
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
-            speech = "Salary range: " + job['MinSalary'] + " to " + job['MaxSalary']
+            speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         
         return  {
                  "speech": speech,
