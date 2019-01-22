@@ -193,7 +193,7 @@ def processRequest(req):
             speech = "Salary range: " + job['MinSalary'] + " to " + job['MaxSalary']
         else:
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
-            speech = "Job Description: " + job['JobDescription']
+            speech = "Salary range: " + job['MinSalary'] + " to " + job['MaxSalary']
         
         return  {
                  "speech": speech,
