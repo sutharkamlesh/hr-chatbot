@@ -145,7 +145,7 @@ def processRequest(req):
         Skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position in {1} with experience ranging between {2} to {3} years.".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
         else:
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
@@ -160,13 +160,14 @@ def processRequest(req):
     
     elif req.get("result").get("action") == "job_description":
         result = req.get("result")
-        parameters = result.get("parameters")
+        contexts = result.get("contexts")[0]
+        parameters = contexts["parameters"]
         location = parameters['location']
         MinExp = parameters['MinExp']["amount"]
         Skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         else:
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
@@ -181,13 +182,14 @@ def processRequest(req):
     
     elif req.get("result").get("action") == "JobsEnquiry.Salary":
         result = req.get("result")
-        parameters = result.get("parameters")
+        contexts = result.get("contexts")[0]
+        parameters = contexts["parameters"]
         location = parameters['location']
         MinExp = parameters['MinExp']["amount"]
         Skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')
+            job = jobs[jobs['location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Salary range: " + job['MinSalary'] + " to " + job['MaxSalary']
         else:
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].to_dict(orient='records')[0]
