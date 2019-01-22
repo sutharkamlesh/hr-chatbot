@@ -211,4 +211,4 @@ if __name__ == '__main__':
     print("Starting app on port {}".format(port))
     app.run(debug=False, port=port, host='0.0.0.0')
 
-#parameters={"Skills": "Design","MinExp": {"amount": 2,"unit": "yr"},"location": ""}
+# parameters={"Skills": "Marketing","MinExp": {"amount": 4,"unit": "yr"},"location": ""}
