@@ -107,13 +107,16 @@ def processRequest(req):
     elif req.get("result").get("action") == "OfficeLocation":
         result = req.get("result")
         parameters = result.get("parameters")
-        address = office_location[parameters['location']]
-        speech = "Here is the address: "+ address
-        return  {
-                "speech": speech,
-                "displayText": speech,
-                "source": "webhook",
-                }
+        if parameters['location']:
+            address = office_location[parameters['location']]
+            speech = "Here is the address: "+ address
+            return  {
+                    "speech": speech,
+                    "displayText": speech,
+                    "source": "webhook",
+                    }
+        else:
+            return  {}
     
     # About Company with their website
     elif req.get("result").get("action") == "aboutcompany":
