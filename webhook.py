@@ -9,65 +9,68 @@ from flask import request
 from flask import make_response
 
 data = pd.read_csv("Apollo_locations.csv")
-jobs = pd.read_csv("Jobs.csv", encoding = 'latin_1')
+jobs = pd.read_csv("Jobs.csv", encoding='latin_1')
 
-policy = {'Leave':'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
-          "Expense":"http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
-          "Harassment":"http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
-office_location = {"Mumbai":"\n Interactive Avenues Pvt. Ltd.,\n 3rd Floor, Chhibber House,\n M Vasanji Road, Opposite Pop Tate’s, \n Near Sakinaka Metro Station,\n Andheri East, Mumbai - 400072.\n Tel: +91 022 - 6264 5000",
+policy = {'Leave': 'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
+          "Expense": "http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
+          "Harassment": "http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
+
+office_location = {"Mumbai": "\n Interactive Avenues Pvt. Ltd.,\n 3rd Floor, Chhibber House,\n M Vasanji Road, Opposite Pop Tate’s, \n Near Sakinaka Metro Station,\n Andheri East, Mumbai - 400072.\n Tel: +91 022 - 6264 5000",
                     "Gurgaon": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Plot#15, Sector 44, Institutional Area,\n Gurgaon - 122 012.\n Tel: +91 (124) 4410900",
-                    "Bengaluru":"\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Mateen Tower, Diamond District,\n Old Airport Road, Domlur,\n Bengaluru - 560 008.\n Tel: +91 8042717834 \n Mob: +91 9343797506",
-                    "Kolkata":"\n Interactive Avenues Pvt. Ltd.,\n Flat C, Ground Floor, Tivoli Court,\n 1A Ballygunge Circular Road,\n Kolkata- 700019.\n Mob: +91 7044089122"}
+                    "Bengaluru": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Mateen Tower, Diamond District,\n Old Airport Road, Domlur,\n Bengaluru - 560 008.\n Tel: +91 8042717834 \n Mob: +91 9343797506",
+                    "Kolkata": "\n Interactive Avenues Pvt. Ltd.,\n Flat C, Ground Floor, Tivoli Court,\n 1A Ballygunge Circular Road,\n Kolkata- 700019.\n Mob: +91 7044089122"}
+
 office_CP = {
-                "Mumbai":{
-                    "name":"Harish Iyer",
-                    "designation":"Vice President",
-                    "email":"harish.iyer@interactiveavenues.com",
-                    "phone":"9820466984"
+                "Mumbai": {
+                    "name": "Harish Iyer",
+                    "designation": "Vice President",
+                    "email": "harish.iyer@interactiveavenues.com",
+                    "phone": "9820466984"
                 },
                 "Gurgaon": {
-                    "name":"Abhishek Chadha",
-                    "designation":"Vice President",
-                    "email":"abbhishek.chadha@interactiveavenues.com",
-                    "phone":"9871117894"
+                    "name": "Abhishek Chadha",
+                    "designation": "Vice President",
+                    "email": "abbhishek.chadha@interactiveavenues.com",
+                    "phone": "9871117894"
                 },
-                "Bengaluru":{
-                    "name":"Aparna Tadikonda",
-                    "designation":"Executive Vice President",
-                    "email":"aparna.tadikonda@interactiveavenues.com",
-                    "phone":"9343797506"
+                "Bengaluru": {
+                    "name": "Aparna Tadikonda",
+                    "designation": "Executive Vice President",
+                    "email": "aparna.tadikonda@interactiveavenues.com",
+                    "phone": "9343797506"
                 },
-                "Kolkata":{
-                    "name":"Susmita Mukhopadhyay",
-                    "designation":"Senior Group Head",
-                    "email":"susmita.mukhopadhyay@interactiveavenues.com",
-                    "phone":"7044089122"
+                "Kolkata": {
+                    "name": "Susmita Mukhopadhyay",
+                    "designation": "Senior Group Head",
+                    "email": "susmita.mukhopadhyay@interactiveavenues.com",
+                    "phone": "7044089122"
                 }
             }
+
 # Flask app should start in global layout
 app = Flask(__name__)
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    #print(json.dumps(req, indent=4))
-    res = processRequest(req)
+    # print(json.dumps(req, indent=4))
+    res = process_request(req)
 
     res = json.dumps(res, indent=4)
     # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
-    #return	data.to_json()
+    # return data.to_json()
 
 
-def processRequest(req):
-
+def process_request(req):
     # Getting Contact details
     if req.get("result").get("action") == "getcontact":
         result = req.get("result")
         parameters = result.get("parameters")
-        idx = list(data["state"]==parameters["state"]).index(True)
+        idx = list(data["state"] == parameters["state"]).index(True)
         contact = data.loc[idx, 'phone']
         speech = "Here it is: "+contact
         return {
@@ -80,20 +83,20 @@ def processRequest(req):
     elif req.get("result").get("action") == "givingAddress":
         result = req.get("result")
         parameters = result.get("parameters")
-        idx = list(data["state"]==parameters["state"]).index(True)
+        idx = list(data["state"] == parameters["state"]).index(True)
         address = data.loc[idx, 'address']
-        speech = "Here is the address: "+ address
-        return  {
-                "speech": speech,
-                "displayText": speech,
-                "source": "webhook",
-                }
+        speech = "Here is the address: " + address
+        return {
+            "speech": speech,
+            "displayText": speech,
+            "source": "webhook"
+        }
     # Get policy details
     elif req.get("result").get("action") == "getPolicy":
         result = req.get("result")
         parameters = result.get("parameters")
         if parameters['policy'] in policy.keys():
-            speech = "You can see our "+ parameters['policy'] +" policy from here: " + policy[parameters['policy']]
+            speech = "You can see our " + parameters['policy'] + " policy from here: " + policy[parameters['policy']]
         else:
             speech = "Sorry we don't have this information"
         return {
@@ -110,18 +113,37 @@ def processRequest(req):
         if parameters['location']:
             address = office_location[parameters['location']]
             speech = "Here is the address: "+ address
-            return  {
-                    "speech": speech,
-                    "displayText": speech,
-                    "source": "webhook",
-                    }
+            return {
+                "speech": speech,
+                "displayText": speech,
+                "source": "webhook"
+            }
         else:
-            return  {}
+            return {
+                    "speech": "Please Choose the Location you want to visit.",
+                    "displayText": "Choose Location:",
+                    "source": "webhook",
+                    "type": 1,
+                    "buttons": [
+                        {
+                            "text": "Mumbai",
+                            "postback": "Where is your office located in Mumbai?"
+                        },
+                        {
+                            "text": "Gurgaon",
+                            "postback": "Where is your office located in Mumbai?"
+                        },
+                        {
+                            "text": "Kolkata",
+                            "postback": "Where is your office located in Mumbai?"
+                        }
+                    ]
+                    }
     
     # About Company with their website
     elif req.get("result").get("action") == "aboutcompany":
         speech = "A group of people who loved and lived online wanted to change the way you look at it. That’s how IA was formed. Ten years later, that small group has grown to include over 350+ people who share the same passion. And it’s not just passion that we bring to the table. We’ve got some of the most experienced forces on the team and our acquisition by IPG Mediabrands in 2013 has only made us stronger. As the global media holding company of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us the ability to join forces with hundreds of talented marketing professionals within the network"
-        return  {
+        return {
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
@@ -133,7 +155,7 @@ def processRequest(req):
         result = req.get("result")
         parameters = result.get("parameters")
         speech = "You can talk to "+office_CP[parameters['location']]["name"]+" who is "+office_CP[parameters['location']]["designation"]+" at Interactive Avenues. \n Email: "+office_CP[parameters['location']]["email"]+"\n Phone: "+office_CP[parameters['location']]["phone"]
-        return  {
+        return {
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
@@ -154,7 +176,7 @@ def processRequest(req):
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position with experience ranging between {1} to {2} years.".format(job['JobTitle'], job["MinExp"], job["MaxExp"])
         
-        return  {
+        return {
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
@@ -176,7 +198,7 @@ def processRequest(req):
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         
-        return  {
+        return {
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
@@ -198,7 +220,7 @@ def processRequest(req):
             job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
             speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         
-        return  {
+        return {
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
