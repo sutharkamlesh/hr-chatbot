@@ -139,11 +139,11 @@ def process_request(req):
                             },
                             {
                                 "text": "Gurgaon",
-                                "postback": "Where is your office located in Mumbai?"
+                                "postback": "Where is your office located in Gurgaon?"
                             },
                             {
                                 "text": "Kolkata",
-                                "postback": "Where is your office located in Mumbai?"
+                                "postback": "Where is your office located in Kolkata?"
                             }
                         ]
                     },
