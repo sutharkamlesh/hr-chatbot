@@ -125,11 +125,6 @@ def process_request(req):
                 "source": "webhook",
                 'messages': [
                     {
-                        "type": 0,
-                        "platform": "slack",
-                        "speech": "Please Choose the Location you want to visit:"
-                    },
-                    {
                         "type": 1,
                         "platform": "slack",
                         "buttons": [
