@@ -120,26 +120,36 @@ def process_request(req):
             }
         else:
             return {
-                    "speech": "Please Choose the Location you want to visit.",
-                    "displayText": "Choose Location:",
-                    "source": "webhook",
-                    "type": 1,
-                    "buttons": [
-                        {
-                            "text": "Mumbai",
-                            "postback": "Where is your office located in Mumbai?"
-                        },
-                        {
-                            "text": "Gurgaon",
-                            "postback": "Where is your office located in Mumbai?"
-                        },
-                        {
-                            "text": "Kolkata",
-                            "postback": "Where is your office located in Mumbai?"
-                        }
-                    ]
-                    }
-    
+                "speech": "Please Choose the Location you want to visit.",
+                "displayText": "Choose Location:",
+                "source": "webhook",
+                'messages': [
+                    {
+                        "type": 0,
+                        "platform": "slack",
+                        "speech": "Please Choose the Location you want to visit:"
+                    },
+                    {
+                        "type": 1,
+                        "platform": "slack",
+                        "buttons": [
+                            {
+                                "text": "Mumbai",
+                                "postback": "Where is your office located in Mumbai?"
+                            },
+                            {
+                                "text": "Gurgaon",
+                                "postback": "Where is your office located in Mumbai?"
+                            },
+                            {
+                                "text": "Kolkata",
+                                "postback": "Where is your office located in Mumbai?"
+                            }
+                        ]
+                    },
+                ]
+            }
+
     # About Company with their website
     elif req.get("result").get("action") == "aboutcompany":
         speech = "A group of people who loved and lived online wanted to change the way you look at it. That’s how IA was formed. Ten years later, that small group has grown to include over 350+ people who share the same passion. And it’s not just passion that we bring to the table. We’ve got some of the most experienced forces on the team and our acquisition by IPG Mediabrands in 2013 has only made us stronger. As the global media holding company of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us the ability to join forces with hundreds of talented marketing professionals within the network"
