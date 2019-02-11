@@ -120,10 +120,15 @@ def process_request(req):
             }
         else:
             return {
-                "speech": "Please Choose the Location you want to visit.",
+                "speech": "Please Choose the Location you want to visit:",
                 "displayText": "Choose Location:",
                 "source": "webhook",
                 'messages': [
+                    {
+                        "type": 0,
+                        "platform": "slack",
+                        "spech": "Please Choose the Location you want to visit:"
+                    },
                     {
                         "type": 1,
                         "platform": "slack",
