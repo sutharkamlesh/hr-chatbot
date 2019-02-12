@@ -197,6 +197,23 @@ def process_request(req):
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
+                'messages': [
+                    {
+                        "type": 0,
+                        "platform": "slack",
+                        "speech": "Please Choose the Location you want to visit:"
+                    },
+                    {
+                        "type": 1,
+                        "platform": "slack",
+                        "buttons": [
+                            {
+                                "text": "What else can you do?",
+                                "postback": "What else can you do?"
+                            }
+                        ]
+                    }
+                ]
                 }
     
     # Giving Jobs Details 
