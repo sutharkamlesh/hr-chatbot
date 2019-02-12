@@ -146,7 +146,7 @@ def process_request(req):
                                 "postback": "Where is your office located in Kolkata?"
                             }
                         ]
-                    },
+                    }
                 ]
             }
 
@@ -176,14 +176,14 @@ def process_request(req):
         result = req.get("result")
         parameters = result.get("parameters")
         location = parameters['location']
-        MinExp = parameters['MinExp']["amount"]
-        Skills = parameters["Skills"]
+        min_exp = parameters['MinExp']["amount"]
+        skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['Location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
+            job = jobs[jobs['Location'] == location][jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position in {1} with experience ranging between {2} to {3} years.".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position with experience ranging between {1} to {2} years.".format(job['JobTitle'], job["MinExp"], job["MaxExp"])
         
         return {
@@ -198,14 +198,14 @@ def process_request(req):
         contexts = result.get("contexts")[0]
         parameters = contexts["parameters"]
         location = parameters['location']
-        MinExp = parameters['MinExp']["amount"]
-        Skills = parameters["Skills"]
+        min_exp = parameters['MinExp']["amount"]
+        skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['Location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
+            job = jobs[jobs['Location'] == location][jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "Job Description: " + job['JobDescription']
         
         return {
@@ -220,14 +220,14 @@ def process_request(req):
         contexts = result.get("contexts")[0]
         parameters = contexts["parameters"]
         location = parameters['location']
-        MinExp = parameters['MinExp']["amount"]
-        Skills = parameters["Skills"]
+        min_exp = parameters['MinExp']["amount"]
+        skills = parameters["Skills"]
 
         if location:
-            job = jobs[jobs['Location'] == location][jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
+            job = jobs[jobs['Location'] == location][jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         else:
-            job = jobs[jobs["Skills"] == Skills][jobs["MinExp"] <= MinExp].head(1).to_dict(orient='records')[0]
+            job = jobs[jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
         
         return {
