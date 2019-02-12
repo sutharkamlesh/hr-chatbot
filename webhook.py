@@ -112,11 +112,32 @@ def process_request(req):
         parameters = result.get("parameters")
         if parameters['location']:
             address = office_location[parameters['location']]
-            speech = "Here is the address: "+ address
+            speech = "Here is the address: " + address
             return {
                 "speech": speech,
                 "displayText": speech,
-                "source": "webhook"
+                "source": "webhook",
+                'messages': [
+                    {
+                        "type": 0,
+                        "platform": "slack",
+                        "speech": "Please Choose the Location you want to visit:"
+                    },
+                    {
+                        "type": 1,
+                        "platform": "slack",
+                        "buttons": [
+                            {
+                                "text": "Talk to Contact Person their?",
+                                "postback": "Give me contact details from this office."
+                            },
+                            {
+                                "text": "What else can you do?",
+                                "postback": "What else can you do?"
+                            }
+                        ]
+                    }
+                ]
             }
         else:
             return {
@@ -127,7 +148,7 @@ def process_request(req):
                     {
                         "type": 0,
                         "platform": "slack",
-                        "spech": "Please Choose the Location you want to visit:"
+                        "speech": "Please Choose the Location you want to visit:"
                     },
                     {
                         "type": 1,
@@ -152,7 +173,14 @@ def process_request(req):
 
     # About Company with their website
     elif req.get("result").get("action") == "aboutcompany":
-        speech = "A group of people who loved and lived online wanted to change the way you look at it. That’s how IA was formed. Ten years later, that small group has grown to include over 350+ people who share the same passion. And it’s not just passion that we bring to the table. We’ve got some of the most experienced forces on the team and our acquisition by IPG Mediabrands in 2013 has only made us stronger. As the global media holding company of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us the ability to join forces with hundreds of talented marketing professionals within the network"
+        speech = """A group of people who loved and lived online wanted to change the way you look at it. 
+                    That’s how IA was formed. Ten years later, that small group has grown to include over 
+                    350+ people who share the same passion. And it’s not just passion that we bring to the 
+                    table. We’ve got some of the most experienced forces on the team and our acquisition by 
+                    IPG Mediabrands in 2013 has only made us stronger. As the global media holding company 
+                    of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us
+                    the ability to join forces with hundreds of talented marketing professionals within the
+                    network."""
         return {
                  "speech": speech,
                  "displayText": speech,
@@ -164,7 +192,7 @@ def process_request(req):
     elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
         result = req.get("result")
         parameters = result.get("parameters")
-        speech = "You can talk to "+office_CP[parameters['location']]["name"]+" who is "+office_CP[parameters['location']]["designation"]+" at Interactive Avenues. \n Email: "+office_CP[parameters['location']]["email"]+"\n Phone: "+office_CP[parameters['location']]["phone"]
+        speech = "You can talk to " + office_CP[parameters['location']]["name"] + " who is " + office_CP[parameters['location']]["designation"] + " at Interactive Avenues. \n Email: " + office_CP[parameters['location']]["email"] + "\n Phone: " + office_CP[parameters['location']]["phone"]
         return {
                  "speech": speech,
                  "displayText": speech,
@@ -181,7 +209,8 @@ def process_request(req):
 
         if location:
             job = jobs[jobs['Location'] == location][jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
-            speech = "We have job opening for {0} position in {1} with experience ranging between {2} to {3} years.".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
+            speech = """We have job opening for {0} position in {1} with experience ranging 
+                        between {2} to {3} years.""".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
         else:
             job = jobs[jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
             speech = "We have job opening for {0} position with experience ranging between {1} to {2} years.".format(job['JobTitle'], job["MinExp"], job["MaxExp"])
@@ -212,7 +241,7 @@ def process_request(req):
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
-                 "data":{"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                 "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
                 }
     
     elif req.get("result").get("action") == "JobsEnquiry.Salary":
@@ -234,7 +263,7 @@ def process_request(req):
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
-                 "data":{"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                 "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
                 }
     
     else:
