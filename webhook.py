@@ -185,7 +185,23 @@ def process_request(req):
                  "speech": speech,
                  "displayText": speech,
                  "source": "webhook",
-                 "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"}
+                 "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"},
+                'messages': [
+                    {
+                        "type": 1,
+                        "platform": "slack",
+                        "buttons": [
+                            {
+                                "text": "Know benefits of working in IA",
+                                "postback": "what are the benefits of working in IA?"
+                            },
+                            {
+                                "text": "What else can you do?",
+                                "postback": "What else can you do?"
+                            }
+                        ]
+                    }
+                ]
                 }
     
     # Giving Contact person details of given office location 
@@ -198,11 +214,6 @@ def process_request(req):
                  "displayText": speech,
                  "source": "webhook",
                 'messages': [
-                    {
-                        "type": 0,
-                        "platform": "slack",
-                        "speech": "Please Choose the Location you want to visit:"
-                    },
                     {
                         "type": 1,
                         "platform": "slack",
