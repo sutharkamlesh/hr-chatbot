@@ -259,8 +259,16 @@ def process_request(req):
                             "platform": "slack",
                             "buttons": [
                                 {
-                                    "text": "",
-                                    "postback": ""
+                                    "text": "Mumbai",
+                                    "postback": "Looking for job in Mumbai"
+                                },
+                                {
+                                    "text": "Kolkata",
+                                    "postback": "Looking for job in Kolkata"
+                                },
+                                {
+                                    "text": "Gurgaon",
+                                    "postback": "Looking for the job in Gurgaon"
                                 }
                             ]
                         }
