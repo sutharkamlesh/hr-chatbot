@@ -255,9 +255,12 @@ def process_request(req):
             skills = parameters["Skills"]
 
             if location:
-                job = jobs[jobs['Location'] == location][jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
-                speech = """We have job opening for {0} position in {1} with experience ranging 
-                            between {2} to {3} years.""".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
+                try:
+                    job = jobs[jobs['Location'] == location][jobs["Skills"] == skills][jobs["MinExp"] <= min_exp].head(1).to_dict(orient='records')[0]
+                    speech = """We have job opening for {0} position in {1} with experience ranging 
+                                between {2} to {3} years.""".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
+                except:
+                    return {}
             else:
                 return {
                     "speech": "Choose your perfered location for the job:",
