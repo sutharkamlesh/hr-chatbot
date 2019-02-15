@@ -303,10 +303,26 @@ def process_request(req):
                 }
 
             return {
-                     "speech": speech,
-                     "displayText": speech,
-                     "source": "webhook",
-                     "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                        "speech": speech,
+                        "displayText": speech,
+                        "source": "webhook",
+                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        'messages': [
+                            {
+                                "type": 1,
+                                "platform": "slack",
+                                "buttons": [
+                                    {
+                                        "text": "Job Decription",
+                                        "postback": "I want to see Job Description"
+                                    },
+                                    {
+                                        "text": "Salary Range",
+                                        "postback": "Salary for this Job"
+                                    }
+                                ]
+                            }
+                        ]
                     }
 
         elif req.get("result").get("action") == "job_description":
@@ -325,10 +341,26 @@ def process_request(req):
                 speech = "Job Description: " + job['JobDescription']
 
             return {
-                     "speech": speech,
-                     "displayText": speech,
-                     "source": "webhook",
-                     "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                        "speech": speech,
+                        "displayText": speech,
+                        "source": "webhook",
+                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        'messages': [
+                            {
+                                "type": 1,
+                                "platform": "slack",
+                                "buttons": [
+                                    {
+                                        "text": "What else can I do for you?",
+                                        "postback": "What else can I do for you?"
+                                    },
+                                    {
+                                        "text": "Salary Range",
+                                        "postback": "Salary for this Job"
+                                    }
+                                ]
+                            }
+                        ]
                     }
 
         elif req.get("result").get("action") == "JobsEnquiry.Salary":
@@ -347,10 +379,26 @@ def process_request(req):
                 speech = "Salary range: Rs." + str(job['MinSalary']) + " to Rs." + str(job['MaxSalary'])
 
             return {
-                     "speech": speech,
-                     "displayText": speech,
-                     "source": "webhook",
-                     "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"}
+                        "speech": speech,
+                        "displayText": speech,
+                        "source": "webhook",
+                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        'messages': [
+                            {
+                                "type": 1,
+                                "platform": "slack",
+                                "buttons": [
+                                    {
+                                        "text": "What else can I do for you?",
+                                        "postback": "What else can I do for you?"
+                                    },
+                                    {
+                                        "text": "Job Decription",
+                                        "postback": "I want to see Job Description"
+                                    }
+                                ]
+                            }
+                        ]
                     }
 
         else:
