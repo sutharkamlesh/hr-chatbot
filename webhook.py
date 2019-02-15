@@ -180,6 +180,10 @@ def process_request(req):
                                 {
                                     "text": "Kolkata",
                                     "postback": "Where is your office located in Kolkata?"
+                                },
+                                {
+                                    "text": "Bengaluru",
+                                    "postback": "Where is your office located in Bengaluru"
                                 }
                             ]
                         }
@@ -281,6 +285,10 @@ def process_request(req):
                                 {
                                     "text": "Gurgaon",
                                     "postback": "Looking for job in {0} for around {1} years of experience in Gurgaon".format(skills, min_exp)
+                                },
+                                {
+                                    "text": "Bengaluru",
+                                    "postback": "Looking for job in {0} for around {1} years of experience in Bengaluru".format(skills, min_exp)
                                 }
                             ]
                         }
