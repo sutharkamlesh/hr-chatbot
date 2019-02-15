@@ -340,7 +340,8 @@ def process_request(req):
 
         else:
             return {}
-    except:
+    except Exception as e:
+        print(Error: e)
         return {
             "speech": "Oops...I am not able to help you at the moment, please try again..",
             "displayText": "Oops...I am not able to help you at the moment, please try again..",
