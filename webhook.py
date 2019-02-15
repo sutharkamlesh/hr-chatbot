@@ -260,7 +260,11 @@ def process_request(req):
                     speech = """We have job opening for {0} position in {1} with experience ranging 
                                 between {2} to {3} years.""".format(job['JobTitle'], location, job["MinExp"], job["MaxExp"])
                 except:
-                    return {}
+                    return {
+                        "speech": "Sorry, we don't have job opening for you in {0} at {1}".format(skills, location),
+                        "displayText": "Sorry, we don't have job opening for you in {0} at {1}".format(skills, location),
+                        "source": "webhook"
+                    }
             else:
                 return {
                     "speech": "Choose your perfered location for the job:",
