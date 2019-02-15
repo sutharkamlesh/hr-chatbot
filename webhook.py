@@ -49,6 +49,18 @@ office_CP = {
                 }
             }
 
+# Getting years of experience
+def exp2years(exp_dict):
+    if exp_dict['unit'] == 'yr':
+        return exp_dict['amount']
+    elif exp_dict['unit'] == "mo":
+        return exp_dict['amount']/12
+    elif exp_dict['unit'] == 'days':
+        return exp_dict['amount']/365
+    else:
+        return None
+
+
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -235,7 +247,7 @@ def process_request(req):
             result = req.get("result")
             parameters = result.get("parameters")
             location = parameters['location']
-            min_exp = parameters['MinExp']["amount"]
+            min_exp = exp2years(parameters['MinExp'])
             skills = parameters["Skills"]
 
             if location:
@@ -245,7 +257,7 @@ def process_request(req):
             else:
                 return {
                     "speech": "Choose your perfered location for the job:",
-                    "displayText": "",
+                    "displayText": "Choose your perfered location for the job:",
                     "source": "webhook",
                     "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                     'messages': [
@@ -260,15 +272,15 @@ def process_request(req):
                             "buttons": [
                                 {
                                     "text": "Mumbai",
-                                    "postback": "Looking for job in Mumbai"
+                                    "postback": "Looking for job in {0} for around {1} years of experience in Mumbai".format(skills, min_exp)
                                 },
                                 {
                                     "text": "Kolkata",
-                                    "postback": "Looking for job in Kolkata"
+                                    "postback": "Looking for job in {0} for around {1} years of experience in Kolkata".format(skills, min_exp)
                                 },
                                 {
                                     "text": "Gurgaon",
-                                    "postback": "Looking for the job in Gurgaon"
+                                    "postback": "Looking for job in {0} for around {1} years of experience in Gurgaon".format(skills, min_exp)
                                 }
                             ]
                         }
@@ -287,7 +299,7 @@ def process_request(req):
             contexts = result.get("contexts")[0]
             parameters = contexts["parameters"]
             location = parameters['location']
-            min_exp = parameters['MinExp']["amount"]
+            min_exp = exp2years(parameters['MinExp'])
             skills = parameters["Skills"]
 
             if location:
@@ -309,7 +321,7 @@ def process_request(req):
             contexts = result.get("contexts")[0]
             parameters = contexts["parameters"]
             location = parameters['location']
-            min_exp = parameters['MinExp']["amount"]
+            min_exp = exp2years(parameters['MinExp'])
             skills = parameters["Skills"]
 
             if location:
