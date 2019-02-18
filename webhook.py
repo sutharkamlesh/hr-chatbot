@@ -319,6 +319,10 @@ def process_request(req):
                                     {
                                         "text": "Salary Range",
                                         "postback": "Salary for this Job"
+                                    },
+                                    {
+                                        "text": "Apply for the job",
+                                        "postback": "I like to apply for this job"
                                     }
                                 ]
                             }
