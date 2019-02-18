@@ -263,7 +263,19 @@ def process_request(req):
                     return {
                         "speech": "Sorry, we don't have job opening for you in {0} at {1}".format(skills, location),
                         "displayText": "Sorry, we don't have job opening for you in {0} at {1}".format(skills, location),
-                        "source": "webhook"
+                        "source": "webhook",
+                        'messages': [
+                            {
+                                "type": 1,
+                                "platform": "slack",
+                                "buttons": [
+                                    {
+                                        "text": "Look for another job",
+                                        "postback": "I am looking for jobs in IA"
+                                    }
+                                ]
+                            }
+                        ]
                     }
             else:
                 return {
