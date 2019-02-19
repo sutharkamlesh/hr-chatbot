@@ -378,7 +378,30 @@ def process_request(req):
                             }
                         ]
                     }
-
+        elif req.get("results").get("action") == "AllJobs":
+            #speech = ""
+            return {
+                #"speech": speech,
+                #"displayText": speech,
+                "source": "webhook",
+                "data": {"sidebar_url": "https://www.google.com/search?q=qrata+jobs&rlz=1C1CHZL_enIN740IN740&oq=qrata+jobs&aqs=chrome.0.69i59j69i60j0.9069j0j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwiyzdub_cTgAhUaTn0KHV3KBBMQiYsCKAB6BAgBEAM#fpstate=tldetail&htidocid=lfUi4RU4zzif1-e7AAAAAA%3D%3D&htivrt=jobs"},
+                'messages': [
+                    {
+                        "type": 1,
+                        "platform": "slack",
+                        "buttons": [
+                            {
+                                "text": "Help to search jobs",
+                                "postback": "I am looking for jobs in IA"
+                            },
+                            {
+                                "text": "What else you can do?",
+                                "postback": "What else you can do?"
+                            }
+                        ]
+                    }
+                ]
+            }
         elif req.get("result").get("action") == "JobsEnquiry.Salary":
             result = req.get("result")
             contexts = result.get("contexts")[0]
