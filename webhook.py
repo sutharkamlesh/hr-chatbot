@@ -378,7 +378,7 @@ def process_request(req):
                             }
                         ]
                     }
-        elif req.get("results").get("action") == "AllJobs":
+        elif req.get("result").get("action") == "AllJobs":
             #speech = ""
             return {
                 #"speech": speech,
