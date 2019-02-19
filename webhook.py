@@ -379,10 +379,10 @@ def process_request(req):
                         ]
                     }
         elif req.get("result").get("action") == "AllJobs":
-            #speech = ""
+            speech = "We have vrious types of jobs avaible and we always ready to hire smart candidates. You can browser various jobs and apply for the job you liked most."
             return {
-                #"speech": speech,
-                #"displayText": speech,
+                "speech": speech,
+                "displayText": speech,
                 "source": "webhook",
                 "data": {"sidebar_url": "https://www.google.com/search?q=qrata+jobs&rlz=1C1CHZL_enIN740IN740&oq=qrata+jobs&aqs=chrome.0.69i59j69i60j0.9069j0j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwiyzdub_cTgAhUaTn0KHV3KBBMQiYsCKAB6BAgBEAM#fpstate=tldetail&htidocid=lfUi4RU4zzif1-e7AAAAAA%3D%3D&htivrt=jobs"},
                 'messages': [
