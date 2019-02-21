@@ -246,7 +246,7 @@ def process_request(req):
                         ]
                     }
         elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-google_direction":
-            speech = ".............."
+            speech = "Opening Google Maps..."
             return {
                         "speech": speech,
                         "displayText": speech,
