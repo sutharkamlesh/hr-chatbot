@@ -400,7 +400,8 @@ def process_request(req):
                             }
                         ]
                     }
-                ]
+                ],
+                "showButton": True
             }
         elif req.get("result").get("action") == "JobsEnquiry.Salary":
             result = req.get("result")
