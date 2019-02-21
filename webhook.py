@@ -268,6 +268,29 @@ def process_request(req):
                         ]
                     }
 
+        elif req.get("result").get("action") == "visit.home.page":
+            speech = "You see Qrata Page on rightside window. "
+            return {
+                        "speech": speech,
+                        "displayText": speech,
+                        "source": "webhook",
+                        "data":{
+                            "sidebar_url": "http://qrata.co/in/"
+                        },
+                        'messages': [
+                            {
+                                "type": 1,
+                                "platform": "slack",
+                                "buttons": [
+                                    {
+                                        "text": "What else can you do?",
+                                        "postback": "What else can you do?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+
         # Giving Jobs Details
         elif req.get("result").get("action") == "jobs":
             result = req.get("result")
