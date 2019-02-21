@@ -227,11 +227,33 @@ def process_request(req):
         elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
             result = req.get("result")
             parameters = result.get("parameters")
-            speech = "You can talk to " + office_CP[parameters['location']]["name"] + " who is " + office_CP[parameters['location']]["designation"] + " at Interactive Avenues. \n Email: " + office_CP[parameters['location']]["email"] + "\n Phone: " + office_CP[parameters['location']]["phone"]
+            speech = "You can talk to " + [parameters['location']]["name"] + " who is " + office_CP[parameters['location']]["designation"] + " at Interactive Avenues. \n Email: " + office_CP[parameters['location']]["email"] + "\n Phone: " + office_CP[parameters['location']]["phone"]
             return {
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
+                        'messages': [
+                            {
+                                "type": 1,
+                                "platform": "slack",
+                                "buttons": [
+                                    {
+                                        "text": "What else can you do?",
+                                        "postback": "What else can you do?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+        elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-google_direction":
+            speech = ".............."
+            return {
+                        "speech": speech,
+                        "displayText": speech,
+                        "source": "webhook",
+                        "data":{
+                            "sidebar_url": "https://www.google.com/maps/place/Techmatters+Technologies/@18.9984723,72.8187614,16.25z/data=!4m5!3m4!1s0x3be7ce857702f139:0x6757363917fb70ca!8m2!3d18.9962875!4d72.8152659"
+                        }
                         'messages': [
                             {
                                 "type": 1,
