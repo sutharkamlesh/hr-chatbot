@@ -252,7 +252,7 @@ def process_request(req):
                         "displayText": speech,
                         "source": "webhook",
                         "data":{
-                            "sidebar_url": "https://www.google.com/maps/place/Techmatters+Technologies/@18.9984723,72.8187614,16.25z/data=!4m5!3m4!1s0x3be7ce857702f139:0x6757363917fb70ca!8m2!3d18.9962875!4d72.8152659"
+                            "sidebar_url": "https://goo.gl/maps/JzsDHJjVtoT2"
                         },
                         'messages': [
                             {
