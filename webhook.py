@@ -327,7 +327,7 @@ def process_request(req):
                     "speech": "Choose your perfered location for the job:",
                     "displayText": "Choose your perfered location for the job:",
                     "source": "webhook",
-                    "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                    #"data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                     'messages': [
                         {
                             "type": 0,
@@ -363,7 +363,7 @@ def process_request(req):
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
-                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        "data": {"showButton": True, "sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                         'messages': [
                             {
                                 "type": 1,
@@ -376,10 +376,6 @@ def process_request(req):
                                     {
                                         "text": "Salary Range",
                                         "postback": "Salary for this Job"
-                                    },
-                                    {
-                                        "text": "Apply for the job",
-                                        "postback": "I like to apply for this job"
                                     }
                                 ]
                             }
