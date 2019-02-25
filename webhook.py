@@ -316,7 +316,7 @@ def process_request(req):
                                 "buttons": [
                                     {
                                         "text": "Look for another job",
-                                        "postback": "I am looking for jobs in IA"
+                                        "postback": "I am looking for jobs in Qrata"
                                     }
                                 ]
                             }
