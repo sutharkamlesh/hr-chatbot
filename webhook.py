@@ -424,20 +424,20 @@ def process_request(req):
                         ]
                     }
         elif req.get("result").get("action") == "AllJobs":
-            speech = "We have vrious types of jobs avaible and we always ready to hire smart candidates. You can browser various jobs and apply for the job you liked most."
+            speech = "We have various types of jobs avaible and we always ready to hire smart candidates. You can browser various jobs and apply for the job you liked most."
             return {
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "data": {"showButton": True},
+                "data": {"showButton": True, sidebar_url:""},
                 'messages': [
                     {
                         "type": 1,
                         "platform": "slack",
                         "buttons": [
                             {
-                                "text": "Help to search jobs",
-                                "postback": "I am looking for jobs in IA"
+                                "text": "Search a job",
+                                "postback": "Search a job for me"
                             },
                             {
                                 "text": "What else you can do?",
