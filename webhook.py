@@ -420,7 +420,7 @@ def process_request(req):
                         ]
                     }
         elif req.get("result").get("action") == "AllJobs":
-            speech = "We have various types of jobs avaible and we always ready to hire smart candidates. You can browser various jobs and apply for the job you liked most."
+            speech = "We have various types of jobs avaible and we always ready to hire smart candidates. You can browse through various jobs and apply for the job you liked most."
             return {
                 "speech": speech,
                 "displayText": speech,
