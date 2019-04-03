@@ -431,6 +431,20 @@ def process_request(req):
                         "type": 1,
                         "platform": "slack",
                         "buttons": [
+                                        {
+                                            "text": "Search a job",
+                                            "postback": "Search a job for me"
+                                        },
+                                        {
+                                            "text": "What else you can do?",
+                                            "postback": "What else you can do?"
+                                        }
+                                    ]
+                    },
+                    {
+                        "type": 1,
+                        "platform": "facebook",
+                        "buttons": [
                             {
                                 "text": "Search a job",
                                 "postback": "Search a job for me"
