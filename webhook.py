@@ -444,6 +444,7 @@ def process_request(req):
                     {
                         "type": 1,
                         "platform": "facebook",
+                        "text":"Messagae sent",
                         "buttons": [
                             {
                                 "text": "Search a job",
