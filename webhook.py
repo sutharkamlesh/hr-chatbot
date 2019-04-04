@@ -324,15 +324,15 @@ def process_request(req):
                     }
             else:
                 return {
-                    "speech": "Choose your perfered location for the job:",
-                    "displayText": "Choose your perfered location for the job:",
+                    "speech": "Choose your preferred  location for the job:",
+                    "displayText": "Choose your preferred location for the job:",
                     "source": "webhook",
                     #"data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                     'messages': [
                         {
                             "type": 0,
                             "platform": "slack",
-                            "speech": "Choose your perfered location for the job:"
+                            "speech": "Choose your preferred location for the job:"
                         },
                         {
                             "type": 1,
