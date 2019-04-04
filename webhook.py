@@ -340,19 +340,19 @@ def process_request(req):
                             "buttons": [
                                 {
                                     "text": "Mumbai",
-                                    "postback": "Looking for job in {0} for around {1} years of experience in Mumbai".format(skills, min_exp)
+                                    "postback": "Looking for a job in {0} for around {1} years of experience in Mumbai".format(skills, min_exp)
                                 },
                                 {
                                     "text": "Kolkata",
-                                    "postback": "Looking for job in {0} for around {1} years of experience in Kolkata".format(skills, min_exp)
+                                    "postback": "Looking for a job in {0} for around {1} years of experience in Kolkata".format(skills, min_exp)
                                 },
                                 {
                                     "text": "Gurgaon",
-                                    "postback": "Looking for job in {0} for around {1} years of experience in Gurgaon".format(skills, min_exp)
+                                    "postback": "Looking for a job in {0} for around {1} years of experience in Gurgaon".format(skills, min_exp)
                                 },
                                 {
                                     "text": "Bengaluru",
-                                    "postback": "Looking for job in {0} for around {1} years of experience in Bengaluru".format(skills, min_exp)
+                                    "postback": "Looking for a job in {0} for around {1} years of experience in Bengaluru".format(skills, min_exp)
                                 }
                             ]
                         }
@@ -375,7 +375,7 @@ def process_request(req):
                                     },
                                     {
                                         "text": "Salary Range",
-                                        "postback": "Salary for this Job"
+                                        "postback": "The salary for this Job"
                                     }
                                 ]
                             }
@@ -413,7 +413,7 @@ def process_request(req):
                                     },
                                     {
                                         "text": "Salary Range",
-                                        "postback": "Salary for this Job"
+                                        "postback": "The salary for this Job"
                                     }
                                 ]
                             }
