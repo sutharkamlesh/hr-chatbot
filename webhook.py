@@ -268,7 +268,7 @@ def process_request(req):
                             {
                                 "type": 2,
                                 "platform": "facebook",
-                                "title": "https://www.google.com/maps/place/Techmatters+Technologies/@18.9977195,72.8183079,15.5z/data=!4m12!1m6!3m5!1s0x0:0x6757363917fb70ca!2sTechmatters+Technologies!8m2!3d18.9962875!4d72.8152659!3m4!1s0x0:0x6757363917fb70ca!8m2!3d18.9962875!4d72.8152659",
+                                "title": "Google Maps: https://www.google.com/maps/place/Techmatters+Technologies/@18.9977195,72.8183079,15.5z/data=!4m12!1m6!3m5!1s0x0:0x6757363917fb70ca!2sTechmatters+Technologies!8m2!3d18.9962875!4d72.8152659!3m4!1s0x0:0x6757363917fb70ca!8m2!3d18.9962875!4d72.8152659",
                                 "replies": [
                                     "I need more help"
                                 ]
