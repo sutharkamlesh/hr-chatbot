@@ -242,6 +242,14 @@ def process_request(req):
                                         "postback": "What else can you do?"
                                     }
                                 ]
+                            },
+                            {
+                                "type": 2,
+                                "platform": "facebook",
+                                # "title": "",
+                                "replies": [
+                                    "I need more help"
+                                ]
                             }
                         ]
                     }
@@ -295,6 +303,14 @@ def process_request(req):
                                         "postback": "What else can you do?"
                                     }
                                 ]
+                            },
+                            {
+                                "type": 2,
+                                "platform": "facebook",
+                                # "title": "",
+                                "replies": [
+                                    "What else can you do?"
+                                ]
                             }
                         ]
                     }
@@ -326,6 +342,14 @@ def process_request(req):
                                         "text": "Look for another job",
                                         "postback": "I am looking for jobs in Qrata"
                                     }
+                                ]
+                            },
+                            {
+                                "type": 2,
+                                "platform": "facebook",
+                                # "title": "",
+                                "replies": [
+                                    "Look for another job"
                                 ]
                             }
                         ]
@@ -386,6 +410,14 @@ def process_request(req):
                                         "postback": "The salary for this Job"
                                     }
                                 ]
+                            },
+                            {
+                                "type": 2,
+                                "platform": "facebook",
+                                "replies": [
+                                    "See Job Description",
+                                    "Salary for this Job"
+                                ]
                             }
                         ]
                     }
@@ -424,6 +456,14 @@ def process_request(req):
                                         "postback": "The salary for this Job"
                                     }
                                 ]
+                            },
+                            {
+                                "type": 2,
+                                "platform": "facebook",
+                                "replies": [
+                                    "Salary for this Job",
+                                    "What else you can do?"
+                                ]
                             }
                         ]
                     }
@@ -450,18 +490,11 @@ def process_request(req):
                                     ]
                     },
                     {
-                        "type": 1,
+                        "type": 2,
                         "platform": "facebook",
-                        "text":"Messagae sent",
-                        "buttons": [
-                            {
-                                "text": "Search a job",
-                                "postback": "Search a job for me"
-                            },
-                            {
-                                "text": "What else you can do?",
-                                "postback": "What else you can do?"
-                            }
+                        "replies": [
+                            "Search a job for me",
+                            "What else you can do?"
                         ]
                     }
                 ]
