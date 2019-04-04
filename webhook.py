@@ -492,7 +492,7 @@ def process_request(req):
                     {
                         "type": 2,
                         "platform": "facebook",
-                        "title": "Qrata Jobs",
+                        "title": "Visit link to see Qrata jobs",
                         "buttons": [
                             {
                                 "text": "Visit link",
