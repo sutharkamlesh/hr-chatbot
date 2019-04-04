@@ -264,6 +264,14 @@ def process_request(req):
                                         "postback": "What else can you do?"
                                     }
                                 ]
+                            },
+                            {
+                                "type": 2,
+                                "platform": "facebook",
+                                # "title": "",
+                                "replies": [
+                                    "I need more help"
+                                ]
                             }
                         ]
                     }
