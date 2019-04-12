@@ -95,31 +95,31 @@ def process_request(req):
                     }
 
         # Getting Address
-        elif req.get("result").get("action") == "givingAddress":
-            result = req.get("result")
-            parameters = result.get("parameters")
-            idx = list(data["state"] == parameters["state"]).index(True)
-            address = data.loc[idx, 'address']
-            speech = "Here is the address: " + address
-            return {
-                "speech": speech,
-                "displayText": speech,
-                "source": "webhook"
-            }
+        # elif req.get("result").get("action") == "givingAddress":
+        #     result = req.get("result")
+        #     parameters = result.get("parameters")
+        #     idx = list(data["state"] == parameters["state"]).index(True)
+        #     address = data.loc[idx, 'address']
+        #     speech = "Here is the address: " + address
+        #     return {
+        #         "speech": speech,
+        #         "displayText": speech,
+        #         "source": "webhook"
+        #     }
         # Get policy details
-        elif req.get("result").get("action") == "getPolicy":
-            result = req.get("result")
-            parameters = result.get("parameters")
-            if parameters['policy'] in policy.keys():
-                speech = "You can see our " + parameters['policy'] + " policy from here: " + policy[parameters['policy']]
-            else:
-                speech = "Sorry we don't have this information"
-            return {
-                    "speech": speech,
-                    "displayText": speech,
-                    "source": "webhook",
-                    "data": {"sidebar_url": policy[parameters['policy']]}
-                    }
+        # elif req.get("result").get("action") == "getPolicy":
+        #     result = req.get("result")
+        #     parameters = result.get("parameters")
+        #     if parameters['policy'] in policy.keys():
+        #         speech = "You can see our " + parameters['policy'] + " policy from here: " + policy[parameters['policy']]
+        #     else:
+        #         speech = "Sorry we don't have this information"
+        #     return {
+        #             "speech": speech,
+        #             "displayText": speech,
+        #             "source": "webhook",
+        #             "data": {"sidebar_url": policy[parameters['policy']]}
+        #             }
 
         # Getting Address of Office IA
         elif req.get("result").get("action") == "OfficeLocation":
@@ -191,37 +191,37 @@ def process_request(req):
                 }
 
         # About Company with their website
-        elif req.get("result").get("action") == "aboutcompany":
-            speech = """A group of people who loved and lived online wanted to change the way you look at it. 
-                        That’s how IA was formed. Ten years later, that small group has grown to include over 
-                        350+ people who share the same passion. And it’s not just passion that we bring to the 
-                        table. We’ve got some of the most experienced forces on the team and our acquisition by 
-                        IPG Mediabrands in 2013 has only made us stronger. As the global media holding company 
-                        of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us
-                        the ability to join forces with hundreds of talented marketing professionals within the
-                        network."""
-            return {
-                        "speech": speech,
-                        "displayText": speech,
-                        "source": "webhook",
-                        "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"},
-                        'messages': [
-                            {
-                                "type": 1,
-                                "platform": "slack",
-                                "buttons": [
-                                    {
-                                        "text": "Know benefits of working in IA",
-                                        "postback": "what are the benefits of working in IA?"
-                                    },
-                                    {
-                                        "text": "What else can you do?",
-                                        "postback": "What else can you do?"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
+        # elif req.get("result").get("action") == "aboutcompany":
+        #     speech = """A group of people who loved and lived online wanted to change the way you look at it.
+        #                 That’s how IA was formed. Ten years later, that small group has grown to include over
+        #                 350+ people who share the same passion. And it’s not just passion that we bring to the
+        #                 table. We’ve got some of the most experienced forces on the team and our acquisition by
+        #                 IPG Mediabrands in 2013 has only made us stronger. As the global media holding company
+        #                 of the Interpublic Group, IPG Mediabrands operates in more than 127 countries, giving us
+        #                 the ability to join forces with hundreds of talented marketing professionals within the
+        #                 network."""
+        #     return {
+        #                 "speech": speech,
+        #                 "displayText": speech,
+        #                 "source": "webhook",
+        #                 "data": {"sidebar_url": "http://www.interactiveavenues.com/about-us.html"},
+        #                 'messages': [
+        #                     {
+        #                         "type": 1,
+        #                         "platform": "slack",
+        #                         "buttons": [
+        #                             {
+        #                                 "text": "Know benefits of working in IA",
+        #                                 "postback": "what are the benefits of working in IA?"
+        #                             },
+        #                             {
+        #                                 "text": "What else can you do?",
+        #                                 "postback": "What else can you do?"
+        #                             }
+        #                         ]
+        #                     }
+        #                 ]
+        #             }
 
         # Giving Contact person details of given office location
         elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
@@ -395,7 +395,7 @@ def process_request(req):
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
-                        "data": {"showButton": True, "sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        # "data": {"showButton": True, "sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                         'messages': [
                             {
                                 "type": 1,
@@ -441,7 +441,7 @@ def process_request(req):
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
-                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        # "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                         'messages': [
                             {
                                 "type": 1,
@@ -473,7 +473,7 @@ def process_request(req):
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "data": {"showButton": True, "sidebar_url":"http://www.interactiveavenues.com/careers.html"},
+                # "data": {"showButton": True, "sidebar_url":"http://www.interactiveavenues.com/careers.html"},
                 'messages': [
                     {
                         "type": 1,
@@ -521,7 +521,7 @@ def process_request(req):
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
-                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        # "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
                         'messages': [
                             {
                                 "type": 1,
