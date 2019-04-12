@@ -11,44 +11,48 @@ from flask import make_response
 data = pd.read_csv("Apollo_locations.csv")
 jobs = pd.read_csv("Jobs.csv", encoding='latin_1')
 
-policy = {'Leave': 'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
-          "Expense": "http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
-          "Harassment": "http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
+# policy = {'Leave': 'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
+#           "Expense": "http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
+#           "Harassment": "http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
+#
+# office_location = {
+#                     "Mumbai": "\n Interactive Avenues Pvt. Ltd.,\n 3rd Floor, Chhibber House,\n M Vasanji Road, Opposite Pop Tate’s, \n Near Sakinaka Metro Station,\n Andheri East, Mumbai - 400072.\n Tel: +91 022 - 6264 5000",
+#                     "Gurgaon": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Plot#15, Sector 44, Institutional Area,\n Gurgaon - 122 012.\n Tel: +91 (124) 4410900",
+#                     "Bengaluru": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Mateen Tower, Diamond District,\n Old Airport Road, Domlur,\n Bengaluru - 560 008.\n Tel: +91 8042717834 \n Mob: +91 9343797506",
+#                     "Kolkata": "\n Interactive Avenues Pvt. Ltd.,\n Flat C, Ground Floor, Tivoli Court,\n 1A Ballygunge Circular Road,\n Kolkata- 700019.\n Mob: +91 7044089122"
+#                 }
+#
+# office_CP = {
+#                 "Mumbai": {
+#                     "name": "Harish Iyer",
+#                     "designation": "Vice President",
+#                     "email": "harish.iyer@interactiveavenues.com",
+#                     "phone": "9820466984"
+#                 },
+#                 "Gurgaon": {
+#                     "name": "Abhishek Chadha",
+#                     "designation": "Vice President",
+#                     "email": "abbhishek.chadha@interactiveavenues.com",
+#                     "phone": "9871117894"
+#                 },
+#                 "Bengaluru": {
+#                     "name": "Aparna Tadikonda",
+#                     "designation": "Executive Vice President",
+#                     "email": "aparna.tadikonda@interactiveavenues.com",
+#                     "phone": "9343797506"
+#                 },
+#                 "Kolkata": {
+#                     "name": "Susmita Mukhopadhyay",
+#                     "designation": "Senior Group Head",
+#                     "email": "susmita.mukhopadhyay@interactiveavenues.com",
+#                     "phone": "7044089122"
+#                 }
+#             }
 
-office_location = {
-                    "Mumbai": "\n Interactive Avenues Pvt. Ltd.,\n 3rd Floor, Chhibber House,\n M Vasanji Road, Opposite Pop Tate’s, \n Near Sakinaka Metro Station,\n Andheri East, Mumbai - 400072.\n Tel: +91 022 - 6264 5000",
-                    "Gurgaon": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Plot#15, Sector 44, Institutional Area,\n Gurgaon - 122 012.\n Tel: +91 (124) 4410900",
-                    "Bengaluru": "\n Interactive Avenues Pvt. Ltd.,\n 5th Floor, Mateen Tower, Diamond District,\n Old Airport Road, Domlur,\n Bengaluru - 560 008.\n Tel: +91 8042717834 \n Mob: +91 9343797506",
-                    "Kolkata": "\n Interactive Avenues Pvt. Ltd.,\n Flat C, Ground Floor, Tivoli Court,\n 1A Ballygunge Circular Road,\n Kolkata- 700019.\n Mob: +91 7044089122"
-                }
-
-office_CP = {
-                "Mumbai": {
-                    "name": "Harish Iyer",
-                    "designation": "Vice President",
-                    "email": "harish.iyer@interactiveavenues.com",
-                    "phone": "9820466984"
-                },
-                "Gurgaon": {
-                    "name": "Abhishek Chadha",
-                    "designation": "Vice President",
-                    "email": "abbhishek.chadha@interactiveavenues.com",
-                    "phone": "9871117894"
-                },
-                "Bengaluru": {
-                    "name": "Aparna Tadikonda",
-                    "designation": "Executive Vice President",
-                    "email": "aparna.tadikonda@interactiveavenues.com",
-                    "phone": "9343797506"
-                },
-                "Kolkata": {
-                    "name": "Susmita Mukhopadhyay",
-                    "designation": "Senior Group Head",
-                    "email": "susmita.mukhopadhyay@interactiveavenues.com",
-                    "phone": "7044089122"
-                }
-            }
-
+job_page_link = {
+    "Talent acquisition specialist": "https://hire.withgoogle.com/public/jobs/techmatterscom/view/P_AAAAABmAAArMiOkliq1swX",
+    "Talent Acquisition Executive": "https://hire.withgoogle.com/public/jobs/techmatterscom/view/P_AAAAABmAAArNkeEv2Lgbj8"
+}
 # Getting years of experience
 def exp2years(exp_dict):
     if exp_dict['unit'] == 'yr':
@@ -395,7 +399,10 @@ def process_request(req):
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
-                        "data": {"showButton": True, "sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        "data": {
+                            "showButton": True,
+                            # "sidebar_url": "http://www.interactiveavenues.com/careers.html"
+                        },
                         'messages': [
                             {
                                 "type": 1,
@@ -422,6 +429,42 @@ def process_request(req):
                         ]
                     }
 
+        # return a apply job pae when asked about job
+        elif req.get("result").get("action") == "JobTitleLink":
+            result = req.get("result")
+            contexts = result.get("contexts")[0]
+            parameters = contexts["parameters"]
+            job_title = parameters['JobTitle']
+            speech = "Apply directly on the link given alongside."
+            return {
+                "speech": speech,
+                "displayText": speech,
+                "source": "webhook",
+                "data": {
+                    "sidebar_url": job_page_link[job_title]
+                },
+                'messages': [
+                    {
+                        "type": 1,
+                        "platform": "slack",
+                        "buttons": [
+                            {
+                                "text": "What else can I do for you?",
+                                "postback": "What else can I do for you?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": 2,
+                        "platform": "facebook",
+                        "replies": [
+                            "What else you can do?"
+                        ]
+                    }
+                ]
+            }
+
+
         elif req.get("result").get("action") == "job_description":
             result = req.get("result")
             contexts = result.get("contexts")[0]
@@ -441,7 +484,9 @@ def process_request(req):
                         "speech": speech,
                         "displayText": speech,
                         "source": "webhook",
-                        "data": {"sidebar_url": "http://www.interactiveavenues.com/careers.html"},
+                        "data": {
+                            # "sidebar_url": "http://www.interactiveavenues.com/careers.html"
+                        },
                         'messages': [
                             {
                                 "type": 1,
@@ -473,7 +518,10 @@ def process_request(req):
                 "speech": speech,
                 "displayText": speech,
                 "source": "webhook",
-                "data": {"showButton": True, "sidebar_url":"http://www.interactiveavenues.com/careers.html"},
+                "data": {
+                    "showButton": True,
+                    # "sidebar_url":"http://www.interactiveavenues.com/careers.html"
+                },
                 'messages': [
                     {
                         "type": 1,
