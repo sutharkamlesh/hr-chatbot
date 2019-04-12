@@ -260,7 +260,7 @@ def process_request(req):
 
 
         elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-google_direction":
-            speech = "Opening Google Maps..."
+            speech = "Direction to office..."
             return {
                         "speech": speech,
                         "displayText": speech,
@@ -291,7 +291,7 @@ def process_request(req):
                     }
 
         elif req.get("result").get("action") == "visit.home.page":
-            speech = "You see Qrata Page on rightside window. "
+            speech = "Our official webpage will pop out soon..."
             return {
                         "speech": speech,
                         "displayText": speech,
@@ -517,7 +517,7 @@ def process_request(req):
                         ]
                     }
         elif req.get("result").get("action") == "AllJobs":
-            speech = "We have various types of jobs available and we are always ready to hire smart candidates. Click the buttton to apply for job or upload your resume."
+            speech = "We have jobs available on various domains. We are in constant endeavour to hire smart candidates. Choose your preferred job or upload resume."
             return {
                 "speech": speech,
                 "displayText": speech,
