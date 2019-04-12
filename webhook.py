@@ -517,7 +517,7 @@ def process_request(req):
                         ]
                     }
         elif req.get("result").get("action") == "AllJobs":
-            speech = "We have various types of jobs available and we are always ready to hire smart candidates. You can browse through various jobs and apply for the job you liked most."
+            speech = "We have various types of jobs available and we are always ready to hire smart candidates. Click the buttton to apply for job or upload your resume."
             return {
                 "speech": speech,
                 "displayText": speech,
@@ -533,12 +533,12 @@ def process_request(req):
                         "platform": "slack",
                         "buttons": [
                                         {
-                                            "text": "Search a job",
-                                            "postback": "Search a job for me"
+                                            "text": "Talent acquisition specialist",
+                                            "postback": "Apply for Talent acquisition specialist job role"
                                         },
                                         {
-                                            "text": "What else you can do?",
-                                            "postback": "What else you can do?"
+                                            "text": "Talent Acquisition Executive",
+                                            "postback": "Apply for Talent Acquisition Executive job role"
                                         }
                                     ]
                     },
