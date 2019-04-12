@@ -435,8 +435,7 @@ def process_request(req):
         # return a apply job pae when asked about job
         elif req.get("result").get("action") == "JobTitleLink":
             result = req.get("result")
-            contexts = result.get("contexts")[0]
-            parameters = contexts["parameters"]
+            parameters = result.get("parameters")
             job_title = parameters['JobTitle']
             speech = "Apply directly on the link given alongside."
             return {
