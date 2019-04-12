@@ -111,88 +111,88 @@ def process_request(req):
                 "source": "webhook"
             }
         # Get policy details
-        elif req.get("result").get("action") == "getPolicy":
-            result = req.get("result")
-            parameters = result.get("parameters")
-            if parameters['policy'] in policy.keys():
-                speech = "You can see our " + parameters['policy'] + " policy from here: " + policy[parameters['policy']]
-            else:
-                speech = "Sorry we don't have this information"
-            return {
-                    "speech": speech,
-                    "displayText": speech,
-                    "source": "webhook",
-                    "data": {"sidebar_url": policy[parameters['policy']]}
-                    }
+        # elif req.get("result").get("action") == "getPolicy":
+        #     result = req.get("result")
+        #     parameters = result.get("parameters")
+        #     if parameters['policy'] in policy.keys():
+        #         speech = "You can see our " + parameters['policy'] + " policy from here: " + policy[parameters['policy']]
+        #     else:
+        #         speech = "Sorry we don't have this information"
+        #     return {
+        #             "speech": speech,
+        #             "displayText": speech,
+        #             "source": "webhook",
+        #             "data": {"sidebar_url": policy[parameters['policy']]}
+        #             }
 
-        # Getting Address of Office IA
-        elif req.get("result").get("action") == "OfficeLocation":
-            result = req.get("result")
-            parameters = result.get("parameters")
-            if parameters['location']:
-                address = office_location[parameters['location']]
-                speech = "Here is the address: " + address
-                return {
-                    "speech": speech,
-                    "displayText": speech,
-                    "source": "webhook",
-                    'messages': [
-                        {
-                            "type": 0,
-                            "platform": "slack",
-                            "speech": "Please Choose the Location you want to visit:"
-                        },
-                        {
-                            "type": 1,
-                            "platform": "slack",
-                            "buttons": [
-                                {
-                                    "text": "Talk to Contact Person their?",
-                                    "postback": "Give me contact details from this office."
-                                },
-                                {
-                                    "text": "What else can you do?",
-                                    "postback": "What else can you do?"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            else:
-                return {
-                    "speech": "Please Choose the Location you want to visit:",
-                    "displayText": "Choose Location:",
-                    "source": "webhook",
-                    'messages': [
-                        {
-                            "type": 0,
-                            "platform": "slack",
-                            "speech": "Please Choose the Location you want to visit:"
-                        },
-                        {
-                            "type": 1,
-                            "platform": "slack",
-                            "buttons": [
-                                {
-                                    "text": "Mumbai",
-                                    "postback": "Where is your office located in Mumbai?"
-                                },
-                                {
-                                    "text": "Gurgaon",
-                                    "postback": "Where is your office located in Gurgaon?"
-                                },
-                                {
-                                    "text": "Kolkata",
-                                    "postback": "Where is your office located in Kolkata?"
-                                },
-                                {
-                                    "text": "Bengaluru",
-                                    "postback": "Where is your office located in Bengaluru"
-                                }
-                            ]
-                        }
-                    ]
-                }
+        # # Getting Address of Office IA
+        # elif req.get("result").get("action") == "OfficeLocation":
+        #     result = req.get("result")
+        #     parameters = result.get("parameters")
+        #     if parameters['location']:
+        #         address = office_location[parameters['location']]
+        #         speech = "Here is the address: " + address
+        #         return {
+        #             "speech": speech,
+        #             "displayText": speech,
+        #             "source": "webhook",
+        #             'messages': [
+        #                 {
+        #                     "type": 0,
+        #                     "platform": "slack",
+        #                     "speech": "Please Choose the Location you want to visit:"
+        #                 },
+        #                 {
+        #                     "type": 1,
+        #                     "platform": "slack",
+        #                     "buttons": [
+        #                         {
+        #                             "text": "Talk to Contact Person their?",
+        #                             "postback": "Give me contact details from this office."
+        #                         },
+        #                         {
+        #                             "text": "What else can you do?",
+        #                             "postback": "What else can you do?"
+        #                         }
+        #                     ]
+        #                 }
+        #             ]
+        #         }
+        #     else:
+        #         return {
+        #             "speech": "Please Choose the Location you want to visit:",
+        #             "displayText": "Choose Location:",
+        #             "source": "webhook",
+        #             'messages': [
+        #                 {
+        #                     "type": 0,
+        #                     "platform": "slack",
+        #                     "speech": "Please Choose the Location you want to visit:"
+        #                 },
+        #                 {
+        #                     "type": 1,
+        #                     "platform": "slack",
+        #                     "buttons": [
+        #                         {
+        #                             "text": "Mumbai",
+        #                             "postback": "Where is your office located in Mumbai?"
+        #                         },
+        #                         {
+        #                             "text": "Gurgaon",
+        #                             "postback": "Where is your office located in Gurgaon?"
+        #                         },
+        #                         {
+        #                             "text": "Kolkata",
+        #                             "postback": "Where is your office located in Kolkata?"
+        #                         },
+        #                         {
+        #                             "text": "Bengaluru",
+        #                             "postback": "Where is your office located in Bengaluru"
+        #                         }
+        #                     ]
+        #                 }
+        #             ]
+        #         }
 
         # About Company with their website
         elif req.get("result").get("action") == "aboutcompany":
@@ -227,36 +227,38 @@ def process_request(req):
                         ]
                     }
 
-        # Giving Contact person details of given office location
-        elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
-            result = req.get("result")
-            parameters = result.get("parameters")
-            speech = "You can talk to " + [parameters['location']]["name"] + " who is " + office_CP[parameters['location']]["designation"] + " at Interactive Avenues. \n Email: " + office_CP[parameters['location']]["email"] + "\n Phone: " + office_CP[parameters['location']]["phone"]
-            return {
-                        "speech": speech,
-                        "displayText": speech,
-                        "source": "webhook",
-                        'messages': [
-                            {
-                                "type": 1,
-                                "platform": "slack",
-                                "buttons": [
-                                    {
-                                        "text": "What else can you do?",
-                                        "postback": "What else can you do?"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": 2,
-                                "platform": "facebook",
-                                # "title": "",
-                                "replies": [
-                                    "I need more help"
-                                ]
-                            }
-                        ]
-                    }
+        # # Giving Contact person details of given office location
+        # elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-contact_person":
+        #     result = req.get("result")
+        #     parameters = result.get("parameters")
+        #     speech = "You can talk to " + [parameters['location']]["name"] + " who is " + office_CP[parameters['location']]["designation"] + " at Interactive Avenues. \n Email: " + office_CP[parameters['location']]["email"] + "\n Phone: " + office_CP[parameters['location']]["phone"]
+        #     return {
+        #                 "speech": speech,
+        #                 "displayText": speech,
+        #                 "source": "webhook",
+        #                 'messages': [
+        #                     {
+        #                         "type": 1,
+        #                         "platform": "slack",
+        #                         "buttons": [
+        #                             {
+        #                                 "text": "What else can you do?",
+        #                                 "postback": "What else can you do?"
+        #                             }
+        #                         ]
+        #                     },
+        #                     {
+        #                         "type": 2,
+        #                         "platform": "facebook",
+        #                         # "title": "",
+        #                         "replies": [
+        #                             "I need more help"
+        #                         ]
+        #                     }
+        #                 ]
+        #             }
+
+
         elif req.get("result").get("action") == "OfficeLocation.OfficeLocation-google_direction":
             speech = "Opening Google Maps..."
             return {
