@@ -533,8 +533,8 @@ def process_request(req):
                         "platform": "slack",
                         "buttons": [
                                         {
-                                            "text": "Talent acquisition specialist",
-                                            "postback": "Apply for Talent acquisition specialist job role"
+                                            "text": "Talent Acquisition Specialist",
+                                            "postback": "Apply for Talent Acquisition Specialist job role"
                                         },
                                         {
                                             "text": "Talent Acquisition Executive",
