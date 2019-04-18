@@ -50,7 +50,7 @@ jobs_qrata = pd.read_csv('Jobs_Qrata.csv')
 #             }
 
 job_page_link = {
-    "Talent acquisition specialist": "https://hire.withgoogle.com/public/jobs/techmatterscom/view/P_AAAAABmAAArMiOkliq1swX",
+    "Talent Acquisition Specialist": "https://hire.withgoogle.com/public/jobs/techmatterscom/view/P_AAAAABmAAArMiOkliq1swX",
     "Talent Acquisition Executive": "https://hire.withgoogle.com/public/jobs/techmatterscom/view/P_AAAAABmAAArNkeEv2Lgbj8"
 }
 # Getting years of experience
