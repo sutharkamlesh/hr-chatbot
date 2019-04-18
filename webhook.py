@@ -446,7 +446,7 @@ def process_request(req):
                 "source": "webhook",
                 "data": {
                     "sidebar_url": job_page_link[job_title],
-                    "jobs": {
+                    "jobs": [{
                         'company_address': job_details['company_address'],
                         'company_name': job_details['company_name'],
                         'job_description': job_details['job_description'].split("\n"),
@@ -454,7 +454,7 @@ def process_request(req):
                         'max_experience': job_details['max_experience'],
                         'min_experience': job_details['min_experience'],
                         'skills': job_details['skills']
-                    }
+                    }]
                 },
                 'messages': [
                     {
