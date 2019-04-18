@@ -10,7 +10,7 @@ from flask import make_response
 
 data = pd.read_csv("Apollo_locations.csv")
 jobs = pd.read_csv("Jobs.csv", encoding='latin_1')
-
+jobs_qrata = pd.read_excel('Jobs.xlsx')
 # policy = {'Leave': 'http://hrcouncil.ca/docs/POL_Sick_Leave_YWCA.pdf',
 #           "Expense": "http://hrcouncil.ca/hr-toolkit/documents/POL_Expenses_0710.doc",
 #           "Harassment": "http://hrcouncil.ca/docs/POL_Harassment2.pdf"}
@@ -525,6 +525,7 @@ def process_request(req):
 
                 "data": {
                     "showButton": True,
+                    "jobs": jobs_qrata.to_dict(orient="records")
                     # "sidebar_url":"http://www.interactiveavenues.com/careers.html"
                 },
                 'messages': [
