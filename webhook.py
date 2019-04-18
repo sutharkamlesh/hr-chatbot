@@ -437,6 +437,8 @@ def process_request(req):
             result = req.get("result")
             parameters = result.get("parameters")
             job_title = parameters['JobTitle']
+            job_details = jobs_qrata[jobs_qrata.job_title == job_title].to_dict(orient='records')[0]
+
             speech = "Apply directly on the link given alongside."
             return {
                 "speech": speech,
@@ -444,7 +446,15 @@ def process_request(req):
                 "source": "webhook",
                 "data": {
                     "sidebar_url": job_page_link[job_title],
-                    "jobs": jobs_qrata[jobs_qrata.job_title == job_title].to_dict(orient='records')
+                    "jobs": {
+                        'company_address': job_details['company_address'],
+                        'company_name': job_details['company_name'],
+                        'job_description': job_details['job_description'].split("\n"),
+                        'job_title': job_details['job_title'],
+                        'max_experience': job_details['max_experience'],
+                        'min_experience': job_details['min_experience'],
+                        'skills': job_details['skills']
+                    }
                 },
                 'messages': [
                     {
