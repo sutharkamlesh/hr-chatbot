@@ -443,7 +443,8 @@ def process_request(req):
                 "displayText": speech,
                 "source": "webhook",
                 "data": {
-                    "sidebar_url": job_page_link[job_title]
+                    "sidebar_url": job_page_link[job_title],
+                    "jobs": jobs_qrata[jobs_qrata.job_title == job_title].to_dict(orient='records')
                 },
                 'messages': [
                     {
@@ -525,7 +526,6 @@ def process_request(req):
 
                 "data": {
                     "showButton": True,
-                    "jobs": jobs_qrata.to_dict(orient="records")
                     # "sidebar_url":"http://www.interactiveavenues.com/careers.html"
                 },
                 'messages': [
